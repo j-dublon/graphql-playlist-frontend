@@ -1,12 +1,8 @@
-.App {
-  text-align: center;
-}
-
-.App__header {
+.main__header {
   display: flex;
 }
 
-.App__header__logo {
+.main__header__logo {
   height: 4em;
   margin: 1em;
 }
