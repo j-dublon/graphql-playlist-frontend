@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { graphql } from "react-apollo";
 import {
   getAuthorsQuery,
@@ -7,70 +7,57 @@ import {
 } from "../queries/queries";
 import * as compose from "lodash.flowright";
 
-class AddBook extends Component {
-  state = {
-    name: "",
-    genre: "",
-    authorId: "",
-  };
+function AddBook(props) {
+  const [name, setName] = useState("");
+  const [genre, setGenre] = useState("");
+  const [authorId, setAuthorId] = useState("");
 
-  submitForm(event) {
+  function submitForm(event) {
     event.preventDefault();
-    this.props.addBookMutation({
+    props.addBookMutation({
       variables: {
-        name: this.state.name,
-        genre: this.state.genre,
-        authorId: this.state.authorId,
+        name: name,
+        genre: genre,
+        authorId: authorId,
       },
       refetchQueries: [{ query: getBooksQuery }],
     });
   }
 
-  render() {
-    const data = this.props.getAuthorsQuery;
-    return (
-      <form className="addBook" onSubmit={this.submitForm.bind(this)}>
-        <div className="addBook__field">
-          <label>Book Name:</label>
-          <input
-            type="text"
-            onChange={(event) => this.setState({ name: event.target.value })}
-          />
-        </div>
+  const data = props.getAuthorsQuery;
 
-        <div className="addBook__field">
-          <label>Genre:</label>
-          <input
-            type="text"
-            onChange={(event) => this.setState({ genre: event.target.value })}
-          />
-        </div>
+  return (
+    <form className="addBook" onSubmit={submitForm}>
+      <div className="addBook__field">
+        <label>Book Name:</label>
+        <input type="text" onChange={(event) => setName(event.target.value)} />
+      </div>
 
-        <div className="addBook__field">
-          <label>Author:</label>
-          <select
-            onChange={(event) =>
-              this.setState({ authorId: event.target.value })
-            }
-          >
-            {data.loading ? (
-              <option disabled>Loading authors...</option>
-            ) : (
-              data.authors.map((author) => {
-                return (
-                  <option key={author.id} value={author.id}>
-                    {author.name}
-                  </option>
-                );
-              })
-            )}
-          </select>
-        </div>
+      <div className="addBook__field">
+        <label>Genre:</label>
+        <input type="text" onChange={(event) => setGenre(event.target.value)} />
+      </div>
 
-        <button> + </button>
-      </form>
-    );
-  }
+      <div className="addBook__field">
+        <label>Author:</label>
+        <select onChange={(event) => setAuthorId(event.target.value)}>
+          {data.loading ? (
+            <option disabled>Loading authors...</option>
+          ) : (
+            data.authors.map((author) => {
+              return (
+                <option key={author.id} value={author.id}>
+                  {author.name}
+                </option>
+              );
+            })
+          )}
+        </select>
+      </div>
+
+      <button> + </button>
+    </form>
+  );
 }
 
 export default compose(
