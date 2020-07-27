@@ -22,6 +22,9 @@ function AddBook(props) {
       },
       refetchQueries: [{ query: getBooksQuery }],
     });
+    setName("");
+    setGenre("");
+    setAuthorId("");
   }
 
   const data = props.getAuthorsQuery;
@@ -30,17 +33,29 @@ function AddBook(props) {
     <form className="addBook" onSubmit={submitForm}>
       <div className="addBook__field">
         <label>Book Name:</label>
-        <input type="text" onChange={(event) => setName(event.target.value)} />
+        <input
+          type="text"
+          onChange={(event) => setName(event.target.value)}
+          value={name}
+        />
       </div>
 
       <div className="addBook__field">
         <label>Genre:</label>
-        <input type="text" onChange={(event) => setGenre(event.target.value)} />
+        <input
+          type="text"
+          onChange={(event) => setGenre(event.target.value)}
+          value={genre}
+        />
       </div>
 
       <div className="addBook__field">
         <label>Author:</label>
-        <select onChange={(event) => setAuthorId(event.target.value)}>
+        <select
+          onChange={(event) => setAuthorId(event.target.value)}
+          value={authorId}
+        >
+          <option value={""}>Select</option>
           {data.loading ? (
             <option disabled>Loading authors...</option>
           ) : (
