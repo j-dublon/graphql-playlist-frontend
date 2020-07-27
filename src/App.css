@@ -1,8 +1,8 @@
-.main__header {
+.header {
   display: flex;
 }
 
-.main__header__logo {
+.header__logo {
   height: 4em;
   margin: 1em;
 }
