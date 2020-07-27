@@ -19,7 +19,7 @@ function App() {
             className="header__logo"
             alt="logo"
           />
-          <h1>Jodi's Book List</h1>
+          <h1 className="header__title">Jodi's Book List</h1>
         </header>
         <BookList />
         <AddBook />
