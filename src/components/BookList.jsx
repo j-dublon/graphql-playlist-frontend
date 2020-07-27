@@ -14,7 +14,6 @@ class BookList extends Component {
 
   render() {
     const { data } = this.props;
-    console.log(this.state);
     if (data.loading) return <p>Loading...</p>;
     return (
       <div>

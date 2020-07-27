@@ -20,7 +20,7 @@ class BookDetails extends Component {
         </div>
       );
     } else {
-      return <p>No book selected</p>;
+      return <div className="bookDetails none">Please select a book</div>;
     }
   }
 }

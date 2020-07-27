@@ -77,11 +77,15 @@ button {
   position: fixed;
   top: 0;
   right: 0;
-  width: 40%;
+  width: 30%;
   height: 100%;
   background: #ad1457;
   padding: 30px;
   overflow: auto;
   box-shadow: -2px -3px 5px rgba(0, 0, 0, 0.3);
   color: white;
+}
+
+.none {
+  font-size: 1.5em;
 }
